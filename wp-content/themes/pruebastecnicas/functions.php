@@ -5,9 +5,9 @@
 */
 
 // Function to register custom post types
-function prueba_tecnica_registrar_cpt() {
+function registrar_cpt() {
     // CPT for Movies
-    register_post_type('prueba_tecnica_peliculas',
+    register_post_type('peliculas',
         array(
             'labels'      => array(
                 'name'          => __('Películas', 'prueba_tecnica'),
@@ -16,11 +16,10 @@ function prueba_tecnica_registrar_cpt() {
             'public'      => true,
             'has_archive' => true,
             'rewrite'     => array('slug' => 'peliculas'),
-            'supports'    => array('title', 'editor', 'thumbnail'),
         )
     );
     // CPT for Series
-    register_post_type('prueba_tecnica_series',
+    register_post_type('series',
         array(
             'labels'      => array(
                 'name'          => __('Series', 'prueba_tecnica'),
@@ -29,16 +28,14 @@ function prueba_tecnica_registrar_cpt() {
             'public'      => true,
             'has_archive' => true,
             'rewrite'     => array('slug' => 'series'),
-            'supports'    => array('title', 'editor', 'thumbnail'),
         )
     );
 }
 
-add_action('init', 'prueba_tecnica_registrar_cpt');
-
-function prueba_tecnica_registrar_taxonomias() {
+// Function to register taxonomies
+function registrar_taxonomias() {
     // Taxonomía de Género para Películas y Series
-    register_taxonomy('prueba_tecnica_genero', array('prueba_tecnica_peliculas', 'prueba_tecnica_series'), array(
+    register_taxonomy('genero', array('peliculas', 'series'), array(
         'labels' => array(
             'name' => __('Géneros', 'prueba_tecnica'),
             'singular_name' => __('Género', 'prueba_tecnica'),
@@ -48,7 +45,7 @@ function prueba_tecnica_registrar_taxonomias() {
     ));
 
     // Taxonomía de Año para Películas y Series
-    register_taxonomy('prueba_tecnica_ano', array('prueba_tecnica_peliculas', 'prueba_tecnica_series'), array(
+    register_taxonomy('ano', array('peliculas', 'series'), array(
         'labels' => array(
             'name' => __('Años de Lanzamiento', 'prueba_tecnica'),
             'singular_name' => __('Año de Lanzamiento', 'prueba_tecnica'),
@@ -58,6 +55,18 @@ function prueba_tecnica_registrar_taxonomias() {
     ));
 }
 
-add_action('init', 'prueba_tecnica_registrar_taxonomias');
+// Hooking up our functions to theme setup
+add_action('init', 'registrar_cpt');
+add_action('init', 'registrar_taxonomias');
+
+function registrar_menus() {
+    register_nav_menus(
+        array(
+            'primary' => __('Menú Principal', 'prueba_tecnica')
+        )
+    );
+}
+add_action('init', 'registrar_menus');
+
 
 ?>
