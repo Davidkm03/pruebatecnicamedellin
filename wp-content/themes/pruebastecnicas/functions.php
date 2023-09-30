@@ -5,6 +5,8 @@
 */
 
 // Function to register custom post types
+add_theme_support('post-thumbnails');
+
 function registrar_cpt() {
     // CPT for Movies
     register_post_type('peliculas',
@@ -16,6 +18,7 @@ function registrar_cpt() {
             'public'      => true,
             'has_archive' => true,
             'rewrite'     => array('slug' => 'peliculas'),
+            'supports'    => array('title', 'editor', 'thumbnail'),  // Agregado 'thumbnail'
         )
     );
     // CPT for Series
@@ -28,6 +31,7 @@ function registrar_cpt() {
             'public'      => true,
             'has_archive' => true,
             'rewrite'     => array('slug' => 'series'),
+            'supports'    => array('title', 'editor', 'thumbnail'),  // Agregado 'thumbnail'
         )
     );
 }
