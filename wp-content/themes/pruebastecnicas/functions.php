@@ -5,9 +5,9 @@
 */
 
 // Function to register custom post types
-function registrar_cpt() {
+function prueba_tecnica_registrar_cpt() {
     // CPT for Movies
-    register_post_type('peliculas',
+    register_post_type('prueba_tecnica_peliculas',
         array(
             'labels'      => array(
                 'name'          => __('Películas', 'prueba_tecnica'),
@@ -16,10 +16,11 @@ function registrar_cpt() {
             'public'      => true,
             'has_archive' => true,
             'rewrite'     => array('slug' => 'peliculas'),
+            'supports'    => array('title', 'editor', 'thumbnail'),
         )
     );
     // CPT for Series
-    register_post_type('series',
+    register_post_type('prueba_tecnica_series',
         array(
             'labels'      => array(
                 'name'          => __('Series', 'prueba_tecnica'),
@@ -28,36 +29,35 @@ function registrar_cpt() {
             'public'      => true,
             'has_archive' => true,
             'rewrite'     => array('slug' => 'series'),
+            'supports'    => array('title', 'editor', 'thumbnail'),
         )
     );
 }
 
-// Hooking up our function to theme setup
-add_action('init', 'registrar_cpt');
+add_action('init', 'prueba_tecnica_registrar_cpt');
 
-function registrar_taxonomias() {
-    // Taxonomía para Películas
-    register_taxonomy('genero-pelicula', 'peliculas', array(
+function prueba_tecnica_registrar_taxonomias() {
+    // Taxonomía de Género para Películas y Series
+    register_taxonomy('prueba_tecnica_genero', array('prueba_tecnica_peliculas', 'prueba_tecnica_series'), array(
         'labels' => array(
-            'name' => __('Géneros de Películas', 'prueba_tecnica'),
-            'singular_name' => __('Género de Película', 'prueba_tecnica'),
+            'name' => __('Géneros', 'prueba_tecnica'),
+            'singular_name' => __('Género', 'prueba_tecnica'),
         ),
         'public' => true,
         'hierarchical' => true,
     ));
-    // Taxonomía para Series
-    register_taxonomy('genero-serie', 'series', array(
+
+    // Taxonomía de Año para Películas y Series
+    register_taxonomy('prueba_tecnica_ano', array('prueba_tecnica_peliculas', 'prueba_tecnica_series'), array(
         'labels' => array(
-            'name' => __('Géneros de Series', 'prueba_tecnica'),
-            'singular_name' => __('Género de Serie', 'prueba_tecnica'),
+            'name' => __('Años de Lanzamiento', 'prueba_tecnica'),
+            'singular_name' => __('Año de Lanzamiento', 'prueba_tecnica'),
         ),
         'public' => true,
-        'hierarchical' => true,
+        'hierarchical' => false,
     ));
 }
 
-add_action('init', 'registrar_taxonomias');
-
-
+add_action('init', 'prueba_tecnica_registrar_taxonomias');
 
 ?>
