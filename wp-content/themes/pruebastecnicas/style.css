@@ -14,34 +14,3 @@ body, html {
     padding: 0;
 }
 
-header {
-    width: 100%;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-}
-
-.header-section {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-}
-
-.logo a {
-    text-decoration: none;
-}
-
-.menu {
-    /* Estilos de menú */
-}
-
-.phone {
-    /* Estilos phone */
-}
-

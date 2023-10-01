@@ -60,8 +60,9 @@ function registrar_taxonomias() {
 }
 
 // Hooking up our functions to theme setup
-add_action('init', 'registrar_cpt');
-add_action('init', 'registrar_taxonomias');
+add_action('init', 'registrar_cpt', 5);
+add_action('init', 'registrar_taxonomias', 5);
+
 
 function registrar_menus() {
     register_nav_menus(
@@ -71,6 +72,3 @@ function registrar_menus() {
     );
 }
 add_action('init', 'registrar_menus');
-
-
-?>
